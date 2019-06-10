@@ -11,7 +11,7 @@ using Web.ModelViews;
 
 namespace Web.Controllers
 {
-    public class ArticlesController : Controller
+    public class ArticlesController : BaseController
     {
         ApplicationDbContext db = new ApplicationDbContext();
         public List<ArticleModel> PublishedArticles = new List<ArticleModel>();
@@ -65,13 +65,13 @@ namespace Web.Controllers
                 var link = model.ContentUrl;
                 WebPage page = new WebPage(link);
                 page.Load();
-                if (!page.Title.IsNullOrEmptyOrWhiteSpace())
-                {
-                    if (!page.IsGoogleDoc())
-                    {
-                        model.Title = page.Title;
-                    }
-                }
+                //if (!page.Title.IsNullOrEmptyOrWhiteSpace())
+                //{
+                //    if (!page.IsGoogleDoc())
+                //    {
+                //        model.Title = page.Title;
+                //    }
+                //}
                 if (!page.HtmlContent.IsNullOrEmptyOrWhiteSpace())
                 {
                     //model.Content = page.GetNodesByClass("contents")

@@ -1,41 +1,80 @@
 ﻿@model Web.ModelViews.ArticleView
-@using CafeT.Html
+@using CafeT.Text
 @using CafeT.Time
 
 @{
+    /**/
+
     ViewBag.Title = Model.Title;
 }
 
 <head>
     <meta name="keywords" content="@Model.MetaKeywords" />
     <meta name="description" content="@Model.MetaDescription" />
-    @*<meta property="og:url" content="https://www.your-domain.com/your-page.html" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Your Website Title" />
-        <meta property="og:description" content="Your description" />
-        <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />*@
+    @*<title>@Model.Title</title>*@
+    <!-- You can use Open Graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
 
-</head>
-<div class="row">
-    <div class="col-md-8">
-        <div class="fb-share-button" data-href="http://googledev.club/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fgoogledev.club%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
-        @Html.Raw(Model.Content)
-    </div>
-    <div class="col-md-4">
-        @Html.Raw(Model.Description)
-        @*@Html.Raw("Ngày: " + Model.CreatedDate.TimeAgo())*@
-        @Html.Raw("Tác giả: " + Model.CreatedBy)<br />
-        <img src="@Model.ImageUrl" class="img-fluid" /> <br />
-        @Html.Raw("Views: " + Model.CountViews)
-    </div>
-</div>
-@if (Model.EditLink != null)
-{
-    <p>
-        <a href="@Model.EditLink" title="Edit">Edit</a>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+    </head>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>@Model.Title</h4>
+            @if (Model.ContentUrl.IsYouTubeWatchUrl())
+            {
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item"
+                            src="https://www.youtube.com/embed/@Model.DocumentId"
+                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+            }
+            else
+            {
+                @Html.Raw(Model.Description)
+            }
+            @Html.Raw(Model.Content)
+         
+            <div id="fb-root"></div>
+            <script>
+    (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+            <!-- Your share button code -->
+            <div class="fb-share-button"
+                 data-href="http://sachnoihay.club/articles/details/@Model.GenerateSlug()"
+                 data-layout="button_count">
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            @*@Html.Raw("Ngày: " + Model.CreatedDate.TimeAgo())*@
+            @Html.Raw("Tác giả: " + Model.CreatedBy)<br />
+            <img src="@Model.ImageUrl" class="img-fluid" /> <br />
+            @*<script id="dsq-count-scr" src="//http-googledev-club.disqus.com/count.js" async></script>*@
+            @Html.Raw("Views: " + Model.CountViews)
+        </div>
+    </div>
+    @if (Model.EditLink != null)
+    {
+        <p>
+            <a href="@Model.EditLink" title="Edit">Edit</a>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+
+    <div class="fb-comments" 
+         data-href="https://developers.facebook.com/docs/plugins/comments#configurator" 
+         data-width="" 
+         data-numposts="5"></div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" 
+            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.3&appId=658860411226506&autoLogAppEvents=1">
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
 

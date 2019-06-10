@@ -22,7 +22,7 @@
                         }
                         else
                         {
-                            <img src="~/Content/Images/GoogleDev.Club.png" class="img-fluid" />
+                            <img src="~/Content/Images/Logo.png" class="img-fluid" />
                         }
                     </div>
                     <div class="col-md-8">
@@ -48,19 +48,18 @@
                         <p class="post-desc">
                             @if (item.Description.IsYouTubeWatchUrl())
                             {
-                               
 
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item"
-                                        src="https://www.youtube.com/embed/@item.DocumentId"
-                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen>
-                                </iframe>
-                            </div>
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item"
+                                            src="https://www.youtube.com/embed/@item.DocumentId"
+                                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                </div>
                             }
-                            else
+                            else if(item.Description != null)
                             {
-                                @Html.Raw(item.Description)
+                                @Html.Raw(item.Description.Replace("\n", "<br />"))
                             }
 
                         </p>
