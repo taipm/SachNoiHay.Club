@@ -1,0 +1,17 @@
+﻿@using (Html.BeginForm("Search", "Articles", FormMethod.Post))
+{
+
+    <div class="form-inline mt-2 mt-md-0">
+        <input type="text" id="keyWords" value="Bạn quan tâm gì ?" name="keyWords" class="mr-sm-2">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </div>
+}
+
+@{
+    if (ViewBag.SearchKey != null)
+    {
+        <span>
+            Search Key: @ViewBag.SearchKey
+        </span>
+    }
+}

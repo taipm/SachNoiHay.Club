@@ -1,0 +1,65 @@
+﻿@model Web.ModelViews.ArticleView
+@using CafeT.Html
+@using CafeT.Time
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<head>
+    <meta name="keywords" content="@Model.MetaKeywords" />
+    <meta name="description" content="@Model.MetaDescription" />
+    @*<meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Your Website Title" />
+        <meta property="og:description" content="Your description" />
+        <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />*@
+
+</head>
+<div class="row">
+    <div class="col-md-8">
+        <div class="fb-share-button" data-href="http://googledev.club/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fgoogledev.club%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+        @Html.Raw(Model.Content)
+    </div>
+    <div class="col-md-4">
+        @Html.Raw(Model.Description)
+        @*@Html.Raw("Ngày: " + Model.CreatedDate.TimeAgo())*@
+        @Html.Raw("Tác giả: " + Model.CreatedBy)<br />
+        <img src="@Model.ImageUrl" class="img-fluid" /> <br />
+        <script id="dsq-count-scr" src="//http-googledev-club.disqus.com/count.js" async></script>
+        @Html.Raw("Views: " + Model.CountViews)
+    </div>
+</div>
+@if (Model.EditLink != null)
+{
+    <p>
+        <a href="@Model.EditLink" title="Edit">Edit</a>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+<div id="disqus_thread"></div>
+<script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://http-googledev-club.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
